@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HedgeRobot - Dashboard de Teste em Tempo Real</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 HEDGE ROBOT v1.0</h1>
+            <p>Dashboard de Teste em Tempo Real</p>
+        </header>
+
+        <div class="dashboard">
+            <!-- Status Panel -->
+            <section class="panel status-panel">
+                <h2>📊 Status do Robot</h2>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span>Status:</span>
+                        <strong id="status" class="status-active">🟢 ATIVO</strong>
+                    </div>
+                    <div class="status-item">
+                        <span>Operações Abertas:</span>
+                        <strong id="openPositions">0</strong>
+                    </div>
+                    <div class="status-item">
+                        <span>Lucro/Prejuízo:</span>
+                        <strong id="totalProfit" class="profit">+$0.00</strong>
+                    </div>
+                    <div class="status-item">
+                        <span>Taxa de Ganho:</span>
+                        <strong id="winRate">0%</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Configuration Panel -->
+            <section class="panel config-panel">
+                <h2>⚙️ Configuração</h2>
+                <div class="config-grid">
+                    <div class="config-item">
+                        <label>Símbolos:</label>
+                        <input type="text" id="symbols" value="EURUSD,GBPUSD,XAUUSD,BTCUSD" />
+                    </div>
+                    <div class="config-item">
+                        <label>Lote Base:</label>
+                        <input type="number" id="lotSize" value="0.1" step="0.01" min="0.01" />
+                    </div>
+                    <div class="config-item">
+                        <label>TP (%):</label>
+                        <input type="number" id="tpPercent" value="10" min="1" />
+                    </div>
+                    <div class="config-item">
+                        <label>Hedge (%):</label>
+                        <input type="number" id="hedgePercent" value="10" min="1" />
+                    </div>
+                    <div class="config-item">
+                        <label>Peso Forex (%):</label>
+                        <input type="number" id="forexWeight" value="30" min="0" />
+                    </div>
+                    <div class="config-item">
+                        <label>Peso Ouro (%):</label>
+                        <input type="number" id="goldWeight" value="30" min="0" />
+                    </div>
+                    <div class="config-item">
+                        <label>Peso Crypto (%):</label>
+                        <input type="number" id="cryptoWeight" value="40" min="0" />
+                    </div>
+                </div>
+                <button id="applyConfig" class="btn-primary">Aplicar Configuração</button>
+            </section>
+
+            <!-- Active Positions -->
+            <section class="panel positions-panel">
+                <h2>📈 Posições Abertas</h2>
+                <div id="positionsTable" class="positions-table">
+                    <p style="text-align: center; color: #999;">Nenhuma posição aberta</p>
+                </div>
+            </section>
+
+            <!-- Statistics Panel -->
+            <section class="panel stats-panel">
+                <h2>📊 Estatísticas</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <h3>Operações Totais</h3>
+                        <p class="stat-value" id="totalTrades">0</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Operações Ganhas</h3>
+                        <p class="stat-value success" id="winningTrades">0</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Operações Perdidas</h3>
+                        <p class="stat-value danger" id="losingTrades">0</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Hedges Ativados</h3>
+                        <p class="stat-value info" id="hedgesActivated">0</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Maior Lucro</h3>
+                        <p class="stat-value" id="maxProfit">+$0.00</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Maior Prejuízo</h3>
+                        <p class="stat-value danger" id="maxLoss">-$0.00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chart -->
+            <section class="panel chart-panel">
+                <h2>📈 Gráfico de Lucro/Prejuízo</h2>
+                <canvas id="profitChart" width="400" height="200"></canvas>
+            </section>
+
+            <!-- Simulation Controls -->
+            <section class="panel controls-panel">
+                <h2>🎮 Controles de Simulação</h2>
+                <div class="controls-grid">
+                    <button id="startSimulation" class="btn-success">▶️ Iniciar Simulação</button>
+                    <button id="stopSimulation" class="btn-danger" disabled>⏹️ Parar Simulação</button>
+                    <button id="resetSimulation" class="btn-warning">🔄 Resetar</button>
+                    <button id="fastForward" class="btn-info">⏩ Acelerar</button>
+                </div>
+                <div class="simulation-speed">
+                    <label>Velocidade: <span id="speedValue">1x</span></label>
+                    <input type="range" id="speedSlider" min="1" max="10" value="1" />
+                </div>
+            </section>
+
+            <!-- Log Panel -->
+            <section class="panel log-panel">
+                <h2>📝 Log de Eventos</h2>
+                <div id="logContainer" class="log-container">
+                    <p class="log-entry info">⏱️ Sistema inicializado...</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
